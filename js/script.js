@@ -47,6 +47,37 @@
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
+  // Story scrollytelling: the sticky laptop's screen content follows whichever
+  // chapter (hero / about / services) is currently centered in the viewport.
+  var storyVisual = document.getElementById('storyVisual');
+  var chapters = document.querySelectorAll('.story-chapter');
+  var screenPanels = document.querySelectorAll('.screen-panel');
+
+  function setActiveChapter(chapter) {
+    if (!storyVisual) return;
+    storyVisual.dataset.chapter = chapter;
+    screenPanels.forEach(function (panel) {
+      panel.classList.toggle('is-active', panel.dataset.chapter === chapter);
+    });
+  }
+  setActiveChapter('hero');
+
+  if (chapters.length && storyVisual && 'IntersectionObserver' in window) {
+    var chapterObserver = new IntersectionObserver(
+      function (entries) {
+        var best = null;
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && (!best || entry.intersectionRatio > best.intersectionRatio)) {
+            best = entry;
+          }
+        });
+        if (best) { setActiveChapter(best.target.dataset.chapter); }
+      },
+      { threshold: [0.3, 0.5, 0.7], rootMargin: '-20% 0px -20% 0px' }
+    );
+    chapters.forEach(function (ch) { chapterObserver.observe(ch); });
+  }
+
   // Footer year
   var yearEl = document.getElementById('year');
   if (yearEl) { yearEl.textContent = new Date().getFullYear(); }

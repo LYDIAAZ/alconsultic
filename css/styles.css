@@ -229,18 +229,13 @@ button { font: inherit; }
    Hero
    ========================================================================== */
 
-.hero {
+.story {
   position: relative;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-block: 7rem 3rem;
-  background: var(--grad-hero);
+  background: var(--ink-950);
   overflow: clip;
 }
 
-.hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hero-bg { position: absolute; top: 0; left: 0; right: 0; height: 100svh; z-index: 0; pointer-events: none; }
 .hero-glow {
   position: absolute;
   width: 46vw; height: 46vw;
@@ -252,16 +247,36 @@ button { font: inherit; }
 .hero-glow--cyan { background: var(--cyan-500); top: -10%; right: -8%; }
 .hero-glow--violet { background: var(--lavender-400); bottom: -18%; left: -12%; opacity: .25; }
 
-.hero-inner {
+.story-grid {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
   gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
+  align-items: start;
 }
 
-.hero h1 { font-size: clamp(2.4rem, 5.4vw, 4rem); }
+.story-visual {
+  position: sticky;
+  top: 6.5rem;
+  padding-block: 2rem 0;
+}
+
+.story-content { display: flex; flex-direction: column; }
+
+.story-chapter { padding-block: clamp(3rem, 8vw, 5rem); }
+.story-chapter h2 { max-width: 46ch; margin-bottom: 1.1em; font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
+
+.chapter-hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 7rem 3rem;
+}
+.chapter-hero h1 { font-size: clamp(2.4rem, 5.4vw, 4rem); }
+
 .hero-lede { max-width: 46ch; font-size: 1.05rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.75rem 0 2.5rem; }
 
@@ -272,7 +287,7 @@ button { font: inherit; }
 
 .scroll-cue {
   position: absolute;
-  bottom: 1.75rem;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 26px; height: 42px;
@@ -296,10 +311,10 @@ button { font: inherit; }
 }
 
 /* ==========================================================================
-   Hero — Laptop opening animation
+   Hero — Laptop opening + scrollytelling animation
    ========================================================================== */
 
-.hero-visual {
+.story-visual {
   display: flex;
   justify-content: center;
   perspective: 1800px;
@@ -310,8 +325,15 @@ button { font: inherit; }
   width: var(--lw);
   position: relative;
   transform-style: preserve-3d;
-  transform: rotateX(6deg);
+  transform: rotateX(6deg) rotateY(0deg) scale(1);
+  transition: transform .7s var(--ease-out);
 }
+
+/* Per-chapter travel: the laptop subtly tilts/settles as the matching
+   content chapter scrolls into view, giving the sticky visual a sense of
+   accompanying the page rather than sitting static. */
+.story-visual[data-chapter="about"] .laptop { transform: rotateX(6deg) rotateY(-7deg) scale(.94); }
+.story-visual[data-chapter="services"] .laptop { transform: rotateX(6deg) rotateY(7deg) scale(.88); }
 
 .laptop__screen {
   position: relative;
@@ -353,29 +375,38 @@ button { font: inherit; }
 }
 @keyframes glowIn { to { opacity: 1; } }
 
-.screen-content {
-  position: relative;
+.screen-panel {
+  position: absolute;
+  inset: 0;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .85rem;
   text-align: center;
   padding: 1rem;
   opacity: 0;
-  transform: translateY(10px);
-  animation: contentIn .8s var(--ease-out) 1.85s forwards;
+  transform: translateY(6px);
+  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+  pointer-events: none;
 }
-@keyframes contentIn { to { opacity: 1; transform: translateY(0); } }
+.screen-panel.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
-.screen-mark {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.1rem, 3vw, 1.5rem);
-  letter-spacing: .06em;
-  background: var(--grad-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: .6em;
+.screen-logo {
+  width: clamp(2.25rem, 6vw, 3.5rem);
+  height: clamp(2.25rem, 6vw, 3.5rem);
+  border-radius: 30%;
+  background: #fff;
+  object-fit: cover;
+  padding: 4px;
+  box-shadow: 0 6px 18px -6px rgba(0,0,0,.5);
 }
+
 .screen-slogan {
   font-family: var(--font-display);
   font-weight: 600;
@@ -393,6 +424,30 @@ button { font: inherit; }
   animation: caretBlink 1s steps(1) 2.6s infinite;
 }
 @keyframes caretBlink { 50% { opacity: 0; } }
+
+.screen-stats { display: flex; flex-direction: column; gap: .5rem; }
+.screen-stats div { display: flex; align-items: baseline; justify-content: center; gap: .5rem; }
+.screen-stats strong {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.screen-stats span { font-size: .8rem; color: var(--paper-muted); }
+
+.screen-list { display: flex; flex-direction: column; gap: .5rem; }
+.screen-list li {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(.8rem, 2.2vw, .95rem);
+  color: var(--paper-0);
+  padding: .35rem .9rem;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+}
 
 .laptop__cam {
   position: absolute;
@@ -438,47 +493,16 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .laptop__screen { animation: none; transform: rotateX(0deg); }
   .screen-glow, .laptop__shadow { animation: none; opacity: 1; }
-  .screen-content { animation: none; opacity: 1; transform: none; }
+  .screen-panel { transition: none; transform: none; }
+  .screen-panel.is-active { opacity: 1; }
   .screen-caret { animation: none; }
+  .laptop { transition: none; }
 }
 
 /* ==========================================================================
    About
    ========================================================================== */
 
-.about { background: var(--ink-900); }
-
-.about-grid {
-  display: grid;
-  grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr);
-  gap: clamp(2.5rem, 6vw, 5rem);
-  align-items: center;
-}
-
-.about-card {
-  aspect-ratio: 1 / 1;
-  border-radius: var(--radius-lg);
-  background: var(--grad-hero);
-  border: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  box-shadow: var(--shadow-glow);
-}
-.about-card-mark {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(3rem, 8vw, 5rem);
-  background: var(--grad-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.about-card p { color: var(--paper-muted); letter-spacing: .25em; font-size: .85rem; margin: 0; }
-
-.about-content h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
 .lede { font-size: 1.05rem; }
 
 .about-stats { display: flex; gap: 2.5rem; margin-top: 2rem; }
@@ -722,19 +746,25 @@ button { font: inherit; }
   .site-header.nav-open .main-nav ul { flex-direction: column; gap: 1.1rem; width: 100%; }
   .site-header.nav-open .header-cta { margin-top: 1.75rem; }
 
-  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .story-grid { grid-template-columns: 1fr; }
+  .story-content { text-align: center; }
   .hero-lede { margin-inline: auto; }
   .hero-actions { justify-content: center; }
   .hero-stats { justify-content: center; }
-  .hero-visual { order: -1; margin-bottom: 1rem; }
-
-  .about-grid { grid-template-columns: 1fr; }
-  .about-media { max-width: 320px; margin-inline: auto; }
+  .story-visual {
+    position: static;
+    order: -1;
+    margin-bottom: 1.5rem;
+    padding-block: 0;
+  }
+  /* No scroll-jacking on small screens: the laptop shows once at the top of
+     the story block instead of following each chapter. */
+  .story-visual .laptop { transform: rotateX(6deg) !important; }
 
   .contact-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px) {
-  .hero { padding-block: 6.5rem 2.5rem; }
+  .chapter-hero { padding-block: 6.5rem 2.5rem; min-height: auto; }
   .mid-cta-inner { flex-direction: column; align-items: flex-start; text-align: left; }
 }

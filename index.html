@@ -43,38 +43,42 @@
 
 <main id="main">
 
-  <!-- HERO -->
-  <section class="hero" id="top">
+  <!-- STORY: HERO + ABOUT + SERVICES — laptop sticks and travels with the scroll -->
+  <section class="story" id="top">
     <div class="hero-bg" aria-hidden="true">
       <div class="hero-glow hero-glow--cyan"></div>
       <div class="hero-glow hero-glow--violet"></div>
     </div>
 
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow">Conseil IT &amp; TIC · Algérie / MENA</p>
-        <h1>Transformez <span class="text-gradient">votre entreprise</span></h1>
-        <p class="hero-lede">Expertise en transformation digitale et technologique. ALCONSULTIC vous accompagne dans la modernisation de vos processus internes pour une performance augmentée et une compétitivité renforcée sur le marché.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Discutons de votre projet</a>
-          <a href="#services" class="btn btn-ghost">Découvrir nos services</a>
-        </div>
-        <ul class="hero-stats" aria-label="Chiffres clés">
-          <li><span class="stat-num">14+</span><span class="stat-label">ans d'expérience</span></li>
-          <li><span class="stat-num">400+</span><span class="stat-label">entreprises accompagnées</span></li>
-          <li><span class="stat-num">MENA</span><span class="stat-label">rayonnement régional</span></li>
-        </ul>
-      </div>
+    <div class="container story-grid">
 
-      <div class="hero-visual" aria-hidden="true">
+      <div class="story-visual" id="storyVisual" data-chapter="hero" aria-hidden="true">
         <div class="laptop">
           <div class="laptop__screen">
             <div class="laptop__display">
               <div class="screen-glow"></div>
-              <div class="screen-content">
-                <span class="screen-mark">A/L</span>
+
+              <div class="screen-panel" data-chapter="hero">
+                <img class="screen-logo" src="assets/brand/logo-alconsultic.jpg" alt="" width="56" height="56">
                 <p class="screen-slogan">Transformez<br>votre entreprise</p>
                 <span class="screen-caret" aria-hidden="true"></span>
+              </div>
+
+              <div class="screen-panel" data-chapter="about">
+                <img class="screen-logo" src="assets/brand/logo-alconsultic.jpg" alt="" width="48" height="48">
+                <div class="screen-stats">
+                  <div><strong>14+</strong><span>ans d'expérience</span></div>
+                  <div><strong>400+</strong><span>entreprises accompagnées</span></div>
+                </div>
+              </div>
+
+              <div class="screen-panel" data-chapter="services">
+                <img class="screen-logo" src="assets/brand/logo-alconsultic.jpg" alt="" width="40" height="40">
+                <ul class="screen-list">
+                  <li>Conseil IT</li>
+                  <li>ERP / CRM</li>
+                  <li>Cybersécurité &amp; IA</li>
+                </ul>
               </div>
             </div>
             <div class="laptop__cam"></div>
@@ -89,86 +93,89 @@
           <div class="laptop__shadow"></div>
         </div>
       </div>
-    </div>
 
-    <a href="#about" class="scroll-cue" aria-label="Défiler vers la section suivante">
-      <span></span>
-    </a>
-  </section>
+      <div class="story-content">
 
-  <!-- ABOUT -->
-  <section class="about section" id="about">
-    <div class="container about-grid">
-      <div class="about-media reveal" aria-hidden="true">
-        <div class="about-card">
-          <span class="about-card-mark">A/L</span>
-          <p>CONSULTIC</p>
+        <div class="story-chapter chapter-hero" data-chapter="hero">
+          <p class="eyebrow">Conseil IT &amp; TIC · Algérie / MENA</p>
+          <h1>Transformez <span class="text-gradient">votre entreprise</span></h1>
+          <p class="hero-lede">Expertise en transformation digitale et technologique. ALCONSULTIC vous accompagne dans la modernisation de vos processus internes pour une performance augmentée et une compétitivité renforcée sur le marché.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Discutons de votre projet</a>
+            <a href="#services" class="btn btn-ghost">Découvrir nos services</a>
+          </div>
+          <ul class="hero-stats" aria-label="Chiffres clés">
+            <li><span class="stat-num">14+</span><span class="stat-label">ans d'expérience</span></li>
+            <li><span class="stat-num">400+</span><span class="stat-label">entreprises accompagnées</span></li>
+            <li><span class="stat-num">MENA</span><span class="stat-label">rayonnement régional</span></li>
+          </ul>
+
+          <a href="#about" class="scroll-cue" aria-label="Défiler vers la section suivante">
+            <span></span>
+          </a>
         </div>
-      </div>
-      <div class="about-content reveal">
-        <p class="eyebrow">À propos</p>
-        <h2>Découvrez notre expertise en conseil IT &amp; TIC</h2>
-        <p class="lede">ALCONSULTIC est une entreprise de conseil dynamique spécialisée dans l'accompagnement des entreprises dans leur transformation digitale, offrant des solutions sur mesure adaptées à chaque client.</p>
-        <p>Fondée et dirigée par <strong>Lydia Azzi</strong>, Senior IT &amp; Digital Strategy Consultant, ALCONSULTIC a piloté des projets ERP, IA et e-learning pour des organisations telles que la Banque Mondiale (WEFI/Deloitte), le PNUD, la GIZ et l'ANGEM.</p>
-        <a href="#contact" class="link-arrow">Lire la suite →</a>
 
-        <dl class="about-stats">
-          <div>
-            <dt>14+</dt>
-            <dd>Années d'expérience</dd>
+        <div class="story-chapter chapter-about" id="about" data-chapter="about">
+          <p class="eyebrow">À propos</p>
+          <h2>Découvrez notre expertise en conseil IT &amp; TIC</h2>
+          <p class="lede">ALCONSULTIC est une entreprise de conseil dynamique spécialisée dans l'accompagnement des entreprises dans leur transformation digitale, offrant des solutions sur mesure adaptées à chaque client.</p>
+          <p>Fondée et dirigée par <strong>Lydia Azzi</strong>, Senior IT &amp; Digital Strategy Consultant, ALCONSULTIC a piloté des projets ERP, IA et e-learning pour des organisations telles que la Banque Mondiale (WEFI/Deloitte), le PNUD, la GIZ et l'ANGEM.</p>
+          <a href="#contact" class="link-arrow">Lire la suite →</a>
+
+          <dl class="about-stats">
+            <div>
+              <dt>14+</dt>
+              <dd>Années d'expérience</dd>
+            </div>
+            <div>
+              <dt>400+</dt>
+              <dd>Clients accompagnés</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="story-chapter chapter-services" id="services" data-chapter="services">
+          <p class="eyebrow">Services</p>
+          <h2>Solutions personnalisées pour votre transformation digitale</h2>
+
+          <div class="services-grid">
+            <article class="service-card reveal">
+              <span class="service-num">01</span>
+              <h3>Conseil en IT</h3>
+              <p>Audit, stratégie digitale et accompagnement fonctionnel ou technique adaptés à votre secteur.</p>
+            </article>
+            <article class="service-card reveal">
+              <span class="service-num">02</span>
+              <h3>Développement de logiciels</h3>
+              <p>Intégration de solutions métier, ERP/CRM (Odoo, SAGE X3) et outils sur mesure.</p>
+            </article>
+            <article class="service-card reveal">
+              <span class="service-num">03</span>
+              <h3>Gestion de projets</h3>
+              <p>Pilotage agile de bout en bout, des besoins au déploiement, avec suivi rigoureux.</p>
+            </article>
+            <article class="service-card reveal">
+              <span class="service-num">04</span>
+              <h3>Transformation numérique</h3>
+              <p>Modernisation des processus internes pour une performance et une compétitivité accrues.</p>
+            </article>
+            <article class="service-card reveal">
+              <span class="service-num">05</span>
+              <h3>Cybersécurité &amp; Agents IA</h3>
+              <p>Audit de sécurité, gouvernance et supervision humaine (HITL/HOTL) des systèmes IA.</p>
+            </article>
+            <article class="service-card reveal">
+              <span class="service-num">06</span>
+              <h3>Support technique</h3>
+              <p>Assistance continue, formation des équipes et accompagnement post-déploiement.</p>
+            </article>
           </div>
-          <div>
-            <dt>400+</dt>
-            <dd>Clients accompagnés</dd>
+
+          <div class="section-cta reveal">
+            <a href="#contact" class="btn btn-primary">Voir tous les services</a>
           </div>
-        </dl>
-      </div>
-    </div>
-  </section>
+        </div>
 
-  <!-- SERVICES -->
-  <section class="services section" id="services">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Services</p>
-        <h2>Solutions personnalisées pour votre transformation digitale</h2>
-      </div>
-
-      <div class="services-grid">
-        <article class="service-card reveal">
-          <span class="service-num">01</span>
-          <h3>Conseil en IT</h3>
-          <p>Audit, stratégie digitale et accompagnement fonctionnel ou technique adaptés à votre secteur.</p>
-        </article>
-        <article class="service-card reveal">
-          <span class="service-num">02</span>
-          <h3>Développement de logiciels</h3>
-          <p>Intégration de solutions métier, ERP/CRM (Odoo, SAGE X3) et outils sur mesure.</p>
-        </article>
-        <article class="service-card reveal">
-          <span class="service-num">03</span>
-          <h3>Gestion de projets</h3>
-          <p>Pilotage agile de bout en bout, des besoins au déploiement, avec suivi rigoureux.</p>
-        </article>
-        <article class="service-card reveal">
-          <span class="service-num">04</span>
-          <h3>Transformation numérique</h3>
-          <p>Modernisation des processus internes pour une performance et une compétitivité accrues.</p>
-        </article>
-        <article class="service-card reveal">
-          <span class="service-num">05</span>
-          <h3>Cybersécurité &amp; Agents IA</h3>
-          <p>Audit de sécurité, gouvernance et supervision humaine (HITL/HOTL) des systèmes IA.</p>
-        </article>
-        <article class="service-card reveal">
-          <span class="service-num">06</span>
-          <h3>Support technique</h3>
-          <p>Assistance continue, formation des équipes et accompagnement post-déploiement.</p>
-        </article>
-      </div>
-
-      <div class="section-cta reveal">
-        <a href="#contact" class="btn btn-primary">Voir tous les services</a>
       </div>
     </div>
   </section>
